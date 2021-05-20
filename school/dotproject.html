@@ -75,7 +75,7 @@
         }
 
         input {
-            caret-color: #ffffff;
+            caret-color: #FF0000;
         }
         .btn {
             border: none;
@@ -123,22 +123,14 @@
             height: 40px;
             margin-right: 111px;
         }
-        .good-font {
-            font-family: 'Segoe UI';
-            color: white;
-            font-size: 50px;
-        }
     </style>
 </head>
 <body>
-
+    <!-- <span><label>Enter an item</label></span> -->
     <div class="container">
-        <h1 class="good-font">Is it recyclable?</h1>
-    </div>
-    <div style="margin-top: 50px;" class="container">
         <input class="text" id="trash" type="text" placeholder="Enter an item">
     </div>
-    <div class="container" style="margin-top: 50px;" id="myBtnContainer">
+    <div class="container" id="myBtnContainer">
         <button class="btn active" >Show all</button>
         <button class="btn" >Recyclable</button>
         <button class="btn" >Not Recyclable</button>
@@ -147,7 +139,7 @@
     <br>
     <div class="container"><section id="nameoftrash"><ul id="names"></ul><ul id="recyclable"></ul></section></div>
     <br><br>
-
+    <!-- <p hidden id="notfound" class="container"></p>Not Found</h3> -->
     <div class="sticky">
         <p>DOT project made by <a href="https://www.github.com/shdfe">Sheel</a></p>
     </div>
@@ -198,31 +190,41 @@
             "frozen food boxes": "recyclable",
             "paint": "not recyclable",
             "keyboard (either)": "not recyclable",
-            "textiles ": "not recyclable",
+            "textiles": "not recyclable",
+            "cereal boxes": "recyclable",
+            "cardboard snack boxes": "recyclable",
             "clothing/cloth material": "not recyclable",
             "cardboard boxes": "recyclable",
             "milk cartons": "recyclable",
+            "thermometers": "not recyclable",
             "diapers": "not recyclable",
             "medical needles": "not recyclable",
             "plastic furniture": "not recyclable",
             "aerosol cans": "not recyclable",
+            "tea bags/coffee grounds": "recyclable",
             "smoke detector": "not recyclable",
             "ceramic plates/ceramic furnitures": "not recyclable",
             "phonebooks": "recyclable",
-            "all food": "not recyclable",
+            "expired food": "recyclable",
+            "antifreeze": "not recyclable",
             "motor oil": "not recyclable",
+            "raw meat/cooked meat": "recyclable",
             "grocery bags": "not recyclable",
             "cleaning products (plastic and completely empty)": "not recyclable",
             "milk cartons": "recyclable",
+            "uneaten scrapings of food": "recyclable",
             "plastic laundry baskets": "not recyclable",
             "plastic water bottles": "recyclable",
             "scrap wood": "not recyclable",
-            "batteries": "recyclable",
+            "batteries (hazardous waste collection ONLY)": "recyclable",
+            "baked goods (cakes, pastries, bread)": "recyclable",
             "mirrors": "not recyclable",
             "dishes": "not recyclable",
             "bowling balls": "not recyclable",
             "soda bottles": "recyclable",
             "chip bags": "not recyclable",
+            "car or nail polish": "not recyclable",
+            "wax": "not recyclable",
             "propane cylinder": "recyclable",
             "junk mail": "recyclable",
             "aluminum beverage cans": "recyclable",
