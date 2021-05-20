@@ -358,7 +358,10 @@
             })
         }
         answer.oninput = () => {
-            
+            btns.forEach(e => {
+                e.classList.remove('active')
+            })
+            btns[0].classList.add('active')
             if (answer.value.length === 0){
                 var matches=[];
                 Object.keys(examplejson).forEach(e => matches.push(e.toLowerCase()))
