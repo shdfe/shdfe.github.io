@@ -299,6 +299,7 @@
         };
         btns.forEach(e => {
             e.onclick = () => {
+                answer.value='';
                 if (e.innerText !== "Show all") {
                     btns.forEach(e => {
                         e.classList.remove('active')
