@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: rgb(0, 85, 52);">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            list-style-type: none;
+        }
+        #recyclable {
+            width: 45vw;
+            position: relative;
+            top: 10px;
+            right: 40px;
+            padding-left: 25px;
+            float: left;
+        }
+        #names {
+            width: 45vw;
+            position: relative;
+            top: 10px;
+            float: left;
+        }
+        .item {
+            background-color: rgb(34, 0, 0);
+            border: solid;
+            height:80px;
+            font-size: 32px;
+            border-width: 2px;
+            /* font-weight: bold; */
+            font-family: 'Segoe UI';
+            color: rgb(185, 185, 185);
+            border-color: rgb(73, 0, 0);
+        }
+        div.sticky {
+            width: 100%;
+            height: 30px;
+            font-family: 'Segoe UI';
+            font-weight: bold;
+            font-size: 20px;
+            background-color:rgb(0, 255, 0);
+            position: sticky;
+            margin-left: -10px;
+            padding-left: 40px;
+            bottom: 0;
+        }
+        ::-webkit-input-placeholder {
+            text-align: center;
+        }
+
+        .filterDiv {
+            float: left;
+            background-color: #2196F3;
+            color: #ffffff;
+            width: 100px;
+            line-height: 100px;
+            text-align: center;
+            margin: 2px;
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .container {
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        input:focus, select.focus {
+            outline: none;
+        }
+
+        input {
+            caret-color: #FF0000;
+        }
+        .btn {
+            border: none;
+            outline: none;
+            padding: 12px 16px;
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #ddd;
+        }
+
+        .btn.active {
+            background-color: #666;
+            color: white;
+        }
+        input.text {
+            height: 50px;
+            font-size: 40px;
+            border-color: purple;
+            background-color: rgb(0, 78, 0);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            margin: 0 auto;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+        a:visited {
+            color: #0000FF;
+        }
+        a {
+            color: #0000FF;
+            transition: color 0.8s;
+        }
+        a:hover {
+            color: #FF0000
+        }
+        input.checkLarge {
+            width: 40px;
+            height: 40px;
+            margin-right: 111px;
+        }
+    </style>
+</head>
+<body>
+    <!-- <span><label>Enter an item</label></span> -->
+    <div class="container">
+        <input class="text" id="trash" type="text" placeholder="Enter an item">
+    </div>
+    <div class="container" id="myBtnContainer">
+        <button class="btn active" >Show all</button>
+        <button class="btn" >Recyclable</button>
+        <button class="btn" >Not Recyclable</button>
+    </div>
+   
+    <br>
+    <div class="container"><section id="nameoftrash"><ul id="names"></ul><ul id="recyclable"></ul></section></div>
+    <br><br>
+    <!-- <p hidden id="notfound" class="container"></p>Not Found</h3> -->
+    <div class="sticky">
+        <p>DOT project made by <a href="https://www.github.com/shdfe">Sheel</a></p>
+    </div>
+
+    <script>
+        var answer = document.getElementById('trash');
+        var names = document.getElementById('names');
+        var recyclable = document.getElementById('recyclable');
+        var notfound = document.getElementById("notfound")
+        var btns = [...document.getElementById("myBtnContainer").children];
+
+
+
+        
+//val, dict
+        function getAllIndices(str, str2) {
+            var indices = [];
+            // for (let i = 0; i < str2.length - str.length; i++) {
+            //     //G A R B A G E s2
+            //     //0 1 2 3 4 5 6
+            //     //  A R B 
+            //     if (str2.slice(i, i + str.length - 1) === str) {
+            //         indices.push(str2);
+            //     }
+            // }
+            if (str2.includes(str) && str !== "") {
+                return str2
+            }
+            // return indices
+        }
+
+        const examplejson = {
+            "newspaper": "recyclable",
+            "envelopes": "recyclable",
+            "paper towels": "not recyclable",
+            "magazines": "recyclable",
+            "styrofoam": "not recyclable",
+            "bubble wrap": "not recyclable",
+            "brochures": "recyclable",
+            "pizza boxes": "not recyclable",
+            "ream wrappers": "recyclable",
+            "file folders": "recyclable",
+            "cords": "not recyclable",
+            "light bulbs": "not recyclable",
+            "gasoline": "not recyclable",
+            "tv/television": "not recyclable",
+            "poster board": "recyclable",
+            "frozen food boxes": "recyclable",
+            "paint": "not recyclable",
+            "keyboard (either)": "not recyclable",
+            "textiles ": "not recyclable",
+            "clothing/cloth material": "not recyclable",
+            "cardboard boxes": "recyclable",
+            "milk cartons": "recyclable",
+            "diapers": "not recyclable",
+            "medical needles": "not recyclable",
+            "plastic furniture": "not recyclable",
+            "aerosol cans": "not recyclable",
+            "smoke detector": "not recyclable",
+            "ceramic plates/ceramic furnitures": "not recyclable",
+            "phonebooks": "recyclable",
+            "all food": "not recyclable",
+            "motor oil": "not recyclable",
+            "grocery bags": "not recyclable",
+            "cleaning products (plastic and completely empty)": "not recyclable",
+            "milk cartons": "recyclable",
+            "plastic laundry baskets": "not recyclable",
+            "plastic water bottles": "recyclable",
+            "scrap wood": "not recyclable",
+            "batteries": "recyclable",
+            "mirrors": "not recyclable",
+            "dishes": "not recyclable",
+            "bowling balls": "not recyclable",
+            "soda bottles": "recyclable",
+            "chip bags": "not recyclable",
+            "propane cylinder": "recyclable",
+            "junk mail": "recyclable",
+            "aluminum beverage cans": "recyclable",
+            "candy wrappers": "not recyclable",
+            "clothes hangers": "not recyclable",
+            "shampoo bottles": "recyclable",
+            "food cans": "recyclable",
+            "scrap metal": "recyclable",
+            "hair drier/hair dryer": "not recyclable",
+            "toys": "not recyclable",
+            "soap bottles": "recyclable",
+            "detergent bottles": "recyclable",
+            "vaccuum cleaner": "recyclable",
+            "glass bottles and jars": "recyclable"
+        };
+        btns.forEach(e => {
+            e.onclick = () => {
+                if (e.innerText !== "Show all") {
+                    btns.forEach(e => {
+                        e.classList.remove('active')
+                    })
+                    e.classList.add('active')
+                    var matches=[];
+                    Object.keys(examplejson).forEach(e => matches.push(getAllIndices(answer.value.toLowerCase(), e.toLowerCase())))
+                    names.innerHTML = '';
+                    recyclable.innerHTML = '';
+                    var newData = filterData(examplejson, e.innerText.toLowerCase())
+                    keys = Object.keys(newData)
+                    keys.forEach(e => {
+                        if (e != undefined) {
+                            names.innerHTML += `<li class="item" id="match">${e}</li>`;
+                            recyclable.innerHTML += `<li class="item" id="match">${examplejson[e]}</li>`
+                        }
+                })
+                } else {
+                    btns.forEach(e => {
+                        e.classList.remove('active')
+                    })
+                    e.classList.add('active')
+                    answer.value = '';
+                    names.innerHTML = '';
+                    recyclable.innerHTML = '';
+                    keys = Object.keys(examplejson)
+                    keys.forEach(e => {
+                    if (e != undefined) {
+                        names.innerHTML += `<li class="item" id="match">${e}</li>`;
+                        recyclable.innerHTML += `<li class="item" id="match">${examplejson[e]}</li>`
+                    }
+                })
+                }
+            }
+        })
+        
+        function filterData(data, condition) {
+            var copy = {...data};
+            Object.keys(copy).forEach(e => {
+                if (copy[e] !== condition) {
+                    delete copy[e]
+                }
+            })
+            return copy;
+        }
+
+        if (answer.value.length === 0) {
+            var matches=[];
+            Object.keys(examplejson).forEach(e => matches.push(e.toLowerCase()))
+            names.innerHTML = '';
+            recyclable.innerHTML = '';
+            matches.forEach(e => {
+                if (e != undefined) {
+                    names.innerHTML += `<li class="item" id="match">${e}</li>`;
+                    recyclable.innerHTML += `<li class="item" id="match">${examplejson[e]}</li>`
+                }
+            })
+        }
+        answer.oninput = () => {
+            
+            if (answer.value.length === 0){
+                var matches=[];
+                Object.keys(examplejson).forEach(e => matches.push(e.toLowerCase()))
+                names.innerHTML = '';
+                recyclable.innerHTML = '';
+                matches.forEach(e => {
+                    if (e != undefined) {
+                        names.innerHTML += `<li class="item" id="match">${e}</li>`;
+                        recyclable.innerHTML += `<li class="item" id="match">${examplejson[e]}</li>`
+                    }
+                })
+            } else {
+                var matches=[];
+                console.log(answer.value.length)
+                Object.keys(examplejson).forEach(e => matches.push(getAllIndices(answer.value.toLowerCase(), e.toLowerCase())))
+                names.innerHTML = '';
+                recyclable.innerHTML = '';
+                if (matches.length === 0) {
+                    notfound.hidden = false;
+                } else {
+                    matches.forEach(e => {
+                        if (e != undefined) {
+                            names.innerHTML += `<li class="item" id="match">${e}</li>`;
+                            recyclable.innerHTML += `<li class="item" id="match">${examplejson[e]}</li>`
+                        }
+                    })
+                }
+                // matches.forEach(e => {
+                //     if (e != undefined) {
+                //         names.innerHTML += `<li class="item" id="match">${e}</li>`;
+                //         recyclable.innerHTML += `<li class="item" id="match">${examplejson[e]}</li>`
+                //     }
+                // })
+        }
+            }
+
+
+    </script>
+</body>
+</html>
